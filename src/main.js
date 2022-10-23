@@ -120,9 +120,23 @@ securityCodeMasked.on("accept", () => {
 cardNumberMasked.on("accept", () => {
   const ccNumber = document.querySelector(".cc-number") //Select elements da interface do cartão
 
+  const cardType = cardNumberMasked.masked.currentMask.type //Pegando valor da propriedade type do nosso array de objetos com todos os nossos dados dos cartçoes
+
+  setCardType(cardType) //chamamos a nossa função setCardType e passamos como parâmetro o tipo selecionado acima
+
   //Trocando os dados da interface pelos digitados no input
   ccNumber.innerText =
     cardNumberMasked.value.length === 0
       ? "1234 5678 9012 3456"
       : cardNumberMasked.value
+})
+
+//Mudando o dataExpiration na interface
+expirationDateMasked.on("accept", () => {
+  const ccExpiration = document.querySelector(".cc-extra .value")
+
+  ccExpiration.innerText =
+    expirationDateMasked.value.length === 0
+      ? "02/32"
+      : expirationDateMasked.value
 })
