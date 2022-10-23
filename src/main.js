@@ -82,3 +82,47 @@ const cardNumberPatthern = {
   },
 }
 const cardNumberMasked = IMask(cardNumber, cardNumberPatthern)
+
+//Event Button
+const addButton = document.querySelector("#add-card")
+addButton.addEventListener("click", () => {
+  alert("Cartão adicionado")
+}) //Observando a ação que o botão fará
+
+//Não deixa a página recarregar usando o preventDefault(), o evento é disparado mas ela permanesse
+document.querySelector("form").addEventListener("submit", (event) => {
+  event.preventDefault()
+})
+
+//Capturando o nome de usuário do cartão e trazendo para a interface do cartão
+
+const cardHolder = document.querySelector("#card-holder")
+
+//Selecionando a interface do cartão por suas classes, e trocando sua saída pelo valor digitado por seu input
+cardHolder.addEventListener("input", () => {
+  //observando o input onde digitaremos o nome
+  const ccHolder = document.querySelector(".cc-holder .value") //selecionando as classes onde mudaremos os dados da interface
+
+  ccHolder.innerText =
+    cardHolder.value.length === 0 ? "FULANO DA SILVA" : cardHolder.value //mudando a interface pelo valor digitado no input
+})
+
+//Mudando o securityCode na interface
+securityCodeMasked.on("accept", () => {
+  const ccSecurity = document.querySelector(".cc-security .value") //Select elements da interface do cartão
+
+  //Trocando os dados da interface pelos digitados no input
+  ccSecurity.innerText =
+    securityCodeMasked.value.length === 0 ? "123" : securityCodeMasked.value
+})
+
+//Mudando o cardNumber na interface
+cardNumberMasked.on("accept", () => {
+  const ccNumber = document.querySelector(".cc-number") //Select elements da interface do cartão
+
+  //Trocando os dados da interface pelos digitados no input
+  ccNumber.innerText =
+    cardNumberMasked.value.length === 0
+      ? "1234 5678 9012 3456"
+      : cardNumberMasked.value
+})
